@@ -1,6 +1,12 @@
 body{
     background-color:#f9f9f9;
 }
+
+a {
+    display: inline-block;
+    cursor: pointer;
+}
+
 .todolist{
     background-color:#FFF;
     padding:20px 20px 10px 20px;

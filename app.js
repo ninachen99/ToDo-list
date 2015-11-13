@@ -18,6 +18,22 @@ localStorage.setItem("todo", JSON.stringify(data));
 
 $(document).ready(function(){
 
+//add newly created todos into array, stucked now. 
+      var todosList = [];
+      function todosItm(text, done) {
+         this.text = text;
+         this.done = done;
+      }
+
+    $('#sortable li').each(function() {
+        $(this).find('li').each(function(){
+            todosList.push({
+                text : '',
+                done : '' ,   
+            });
+        });   
+    });
+
     //count todos
     function countTodos(){
         console.log('ready!');
@@ -44,6 +60,8 @@ $(document).ready(function(){
         $('.add-todo').val('');
     }
 
+   //push todos to the todos array list
+   
 
     //mark todos as done states!!!!!!!!!!
     // mark todos as done
@@ -62,11 +80,13 @@ $(document).ready(function(){
     $("#checkAll").click(function(){
         allDone();
     });
-
+    $('#undo').click(function(){
+       console.log('run undo!');
+    });
     //mark todos as done
     function done(doneItem){
         var done = doneItem;
-        var markup = '<li>'+ done +'<button class="btn btn-default btn-xs pull-right remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>';
+        var markup = '<li>'+ done +' <a id="undo" href="#">Undo</a><button class="btn btn-default btn-xs pull-right remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>';
         $('#done-items').append(markup);
         $('.remove').remove();
     }
@@ -81,13 +101,16 @@ $(document).ready(function(){
         
         // add to done
         for (var i = 0; i < doneArray.length; i++) {
-            $('#done-items').append('<li>' + doneArray[i] + '<button class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>');
+            $('#done-items').append('<li>' + doneArray[i] + ' <a id="undo" href="#">Undo</a><button class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>');
         }
         
         // remove from left
         $('#sortable li').remove();
           countTodos();
     }
+    
+    // undo and add back to left
+    
 
     //removing stuff!!!!!!!!
     //delete done task from "done items"
@@ -99,5 +122,7 @@ $(document).ready(function(){
     function removeItem(element){
         $(element).parent().remove();
     }
+    
+     
 
 })
