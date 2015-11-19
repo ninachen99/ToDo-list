@@ -14,28 +14,21 @@ delete data[id];
 localStorage.setItem("todo", JSON.stringify(data));
 */
 
-
-
 $(document).ready(function(){
 
 //add newly created todos into array, stucked now. 
       var todosList = [];
-      function todosItm(text, done) {
-         this.text = text;
-         this.done = done;
+      var len = todosList.length;
+      var Todo = function(text, done) {
+         this.text = todosList[i][0];
+         this.done = todosList[i][1];
+      };
+      for(var i = 0; i < todosList.length; i++){
+          todosList.push(Todo)
       }
 
-    $('#sortable li').each(function() {
-        $(this).find('li').each(function(){
-            todosList.push({
-                text : '',
-                done : '' ,   
-            });
-        });   
-    });
-
     //count todos
-    function countTodos(){
+    function countTodos(todo){
         console.log('ready!');
         var count = $("#sortable li").length;
         $('.count-todos').html(count);
@@ -80,9 +73,12 @@ $(document).ready(function(){
     $("#checkAll").click(function(){
         allDone();
     });
+
+    // finish the undo function...
     $('#undo').click(function(){
        console.log('run undo!');
     });
+    
     //mark todos as done
     function done(doneItem){
         var done = doneItem;
